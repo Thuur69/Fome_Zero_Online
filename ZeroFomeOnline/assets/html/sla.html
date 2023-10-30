@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Header</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            transition: background-color 0.3s;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Add some content to make the page scrollable */
+        .content {
+            height: 1500px;
+            background-color: #f2f2f2;
+        }
+
+        /* Add a class to change the background color when scrolling */
+        .header.scrolled {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="header" id="header">
+        <div class="container">
+            <h1>My Sticky Header</h1>
+        </div>
+    </div>
+    <div class="content">
+        <!-- Your website content goes here -->
+    </div>
+    <script>
+        // JavaScript to add the 'scrolled' class to the header when scrolling down
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 0) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

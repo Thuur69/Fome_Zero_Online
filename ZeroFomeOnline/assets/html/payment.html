@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/payment.css">
+    <title>Doação</title>
+    <script>
+        function updateCestasBasicas() {
+            const donationAmountElement = document.getElementById('donation-amount');
+            const donationAmount = parseFloat(donationAmountElement.value);
+            const customDonationAmount = document.getElementById('custom-donation-amount').value;
+            const cestasBasicasElement = document.getElementById('cestas-basicas');
+
+            if (!isNaN(donationAmount)) {
+                donationAmountElement.value = customDonationAmount;
+            }
+
+            if (!isNaN(customDonationAmount) && customDonationAmount >= 15) {
+                const cestasBasicas = Math.floor(customDonationAmount / 15);
+                cestasBasicasElement.textContent = `Você está doando ${cestasBasicas} cestas básicas.`;
+            } else {
+                cestasBasicasElement.textContent = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Doação para "Quem Tem Fome Tem Pressa"</h1>
+    </header>
+    <main>
+        <section class="donation-form">
+            <h2>Escolha o valor da doação:</h2>
+            <form id="payment-form" onsubmit="updateCestasBasicas(); return false;">
+                <label for="donation-amount">Valor da Doação (R$):</label>
+                <select id="donation-amount" name="amount" required onchange="updateCestasBasicas()">
+                    <option value="15">R$ 15,00</option>
+                    <option value="30">R$ 30,00</option>
+                    <option value="50">R$ 50,00</option>
+                    <option value="100">R$ 100,00</option>
+                    <option value="custom">Outro Valor</option>
+                </select>
+                <input type="number" id="custom-donation-amount" name="custom-amount" placeholder="Digite o valor aqui" style="display: none;">
+                <label for="payment-method">Forma de Pagamento:</label>
+                <select id="payment-method" name="payment-method" required>
+                    <option value="paypal">PayPal</option>
+                    <option value="pix">PIX</option>
+                    <option value="boleto">Boleto Bancário</option>
+                    <option value="credit-card">Cartão de Crédito</option>
+                </select>
+                <label for="name">Nome Completo:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+                <button type="submit">Doar</button>
+                <p id="cestas-basicas"></p>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 "Quem Tem Fome Tem Pressa"</p>
+    </footer>
+    <script>
+        const donationAmountSelect = document.getElementById('donation-amount');
+        const customDonationAmountInput = document.getElementById('custom-donation-amount');
+
+        donationAmountSelect.addEventListener('change', function () {
+            if (donationAmountSelect.value === 'custom') {
+                customDonationAmountInput.style.display = 'block';
+                customDonationAmountInput.focus();
+            } else {
+                customDonationAmountInput.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
